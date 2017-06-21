@@ -13,8 +13,12 @@ foreach ($movies as $movie) {
   afficherImage($movie);
 }
 
+include('inc/header.php');
+
 function afficherImage($movie) {
   echo '<a href="detail.php?id= '.$movie['id'].'"><img class="vignette" src="inc/img/posters/'.$movie['id'].'.jpg"  />' ;
 }
+
+include('inc/footer.php');
 
  ?>
