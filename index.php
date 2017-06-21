@@ -40,7 +40,7 @@ $cats = explode( ",", $categories_by_film);
 foreach($cats as $cat){
   $exist = false;
   $cat = trim($cat);
-  
+
   foreach($genres as $genre){
     if($genre==$cat){
       $exist=true;
