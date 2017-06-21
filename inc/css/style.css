@@ -1,29 +1,141 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Kaushan+Script');
+
+
 /*------------------ HEADER ---------------- */
+
+.mainBanner {
+  background-color: grey;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.45),
+    rgba(0, 0, 0, 0.45)
+  ),url('../img/banner.jpg');
+  background-size:cover;
+}
+
+.mainHeader {
+  text-align: center;
+}
+
+.mainLogo {
+  max-width: 150px;
+  max-height: 150px;
+  width: 100%;
+  height: 100%;
+}
+
+.mainTitle {
+  color: white;
+  font-size: 30px;
+  font-family: "Kaushan Script";
+}
 
 .navbar {
   background-color: #1d1d1d;
   position: relative;
   width: 100%;
   text-align: center;
-  padding: 10px;
+  padding: 20px;
+  /*border-top: 1px solid #ffd800;
+  border-bottom: 1px solid #ffd800;*/
+  margin-bottom: 20px;
+  box-shadow: 0 -1px 8px 2px
 }
 
 .navbar a {
   color: #fff;
   font-family: 'Open Sans', sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   text-transform: uppercase;
   font-weight: normal;
   text-align: left;
-  padding: 15px;
+  padding: 20px;
   text-decoration: none;
 }
 .navbar a:hover {
-  color: #ff3838;
+  color: #ffd800;
 }
 
 /*------------------ MAIN ---------------- */
 
+.movies_grid {
+  display: inline-flex;
+}
+
+.vignette {
+  justify-content: space-between;
+  max-width: 220px;
+  max-height: 300px;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+
+@media (max-width: 576px) {
+  .vignette {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+.btn_more_movies {
+  padding: 10px;
+  background-color: #1d1d1d;
+  border: 1px solid black;
+  text-decoration: none;
+  color: white;
+}
+
+.btn_more_movies:hover {
+  background-color: #ffd800;
+  border: 1px solid orange;
+  color: black;
+}
 
 
 /*------------------ FOOTER ---------------- */
+
+footer {
+  background-color: #1d1d1d;
+  padding: 30px;
+  margin-top: 20px;
+  width: 100%;
+  position: relative;
+}
+
+.footer-center {
+  justify-content: center;
+}
+
+.hr_footer {
+  background-color: #666;
+}
+
+.footer_1, .footer_2, .footer_3, .footer_4 {
+  color: white;
+  justify-content: center;
+  max-width: 300px;
+  width: 100%;
+  margin: 0 20px;
+}
+
+.footer_1 h2, .footer_2 h2, .footer_3 h2, .footer_4 h2 {
+  font-size: 25px;
+}
+
+.copyright {
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  margin-top: 20px;
+}
