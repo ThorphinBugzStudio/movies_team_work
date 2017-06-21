@@ -1,0 +1,23 @@
+
+1iere partie 
+création de la page d'index avec affichage aleatoire de film et transmission de l'id du film cliquer vers la page detail ainsi qu un bouton permettant de recharger une nouvelle liste de films.
+
+2ieme partie 
+création de la page detail affichant tout les details du film précédemment cliquer ( recuperer l'id du film transmis )
+Pretty Url
+- L’url de ces pages de détails devrait contenir la version normalisée du titre du film (slug). Et tant qu’à y être, faites tout votre possible pour référencer au mieux cette page par rapport au titre du film et de son année de réalisation.
+- Boutons sociaux
+- Il doit être possible de partager simplement sur Facebook, Twitter, linkedin, et Google + le film actuellement visionné.
+
+
+3ieme partie
+création du filtre de recherche Catégorie (plusieurs checkboxes, dont une pour cocher tout et une pour tout décocher)
+	 -    Années (de xxxx à xxxx)
+	 -    Popularité
+Ce formulaire doit être caché par défaut
+
+4ieme partie
+créer un système d’inscription et de connexion au site. un pseudo, un email et un mot de passe dans le formulaire + token, role, created_at dans la table
+faire un regex pour email pour verification email
+bouton récupérer un mot de passe oublié, ainsi qu'une case à cocher se souvenir de moi 
+permettra aux internautes de sauvegarder de manière durable les films qu’ils souhaitent voir en base de données
