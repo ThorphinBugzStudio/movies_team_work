@@ -1,0 +1,29 @@
+/*------------------ HEADER ---------------- */
+
+.navbar {
+  background-color: #1d1d1d;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+}
+
+.navbar a {
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: normal;
+  text-align: left;
+  padding: 15px;
+  text-decoration: none;
+}
+.navbar a:hover {
+  color: #ff3838;
+}
+
+/*------------------ MAIN ---------------- */
+
+
+
+/*------------------ FOOTER ---------------- */
