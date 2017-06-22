@@ -85,8 +85,7 @@ foreach($films as $film)
 }
 
 // requete pour afficher les 10 premiers films
-
-$sql = "SELECT * FROM movies_full ORDER BY RAND() LIMIT 10 ";
+$sql = "SELECT id FROM movies_full ORDER BY RAND() LIMIT 10 ";
 $query = $pdo->prepare($sql);
         $query->execute();
         $movies = $query->fetchAll();
@@ -106,9 +105,9 @@ $query = $pdo->prepare($sql);
 </div>
 
 <div class="search-form">
-  <input type="submit" name="search" value="Rechercher">
+  <input type="submit" name="search" value="rechercher">
   <input type="text" name="search-content" value="">
-  <input type="button" name="filter" value="Filtres">
+  <input type="button" name="filter" value="filtres">
 </div>
 
 <div class="hidden options">
@@ -117,21 +116,19 @@ $query = $pdo->prepare($sql);
 
   <label for="categories">Categories</label>
 
-  <ul class="search_category">
     <?php foreach($genres as $genre){ ?>
-      <li>
-        <label for="category"><?php echo $genre ?></label>
-        <input type="checkbox" name="<?php echo $genre ?>" value="">
-      </li>
+
+      <label for="category"><?php echo $genre ?></label>
+      <input type="checkbox" name="<?php echo $genre ?>" value="">
+
   <?php  } ?>
-</ul>
 </div>
 
 
 
 <?php
 function afficherImage($movie) {
-  echo '<a href="detail.php?slug='.$movie['slug'].'"><img class="vignette" src="inc/img/posters/'.$movie['id'].'.jpg"</a>';
+  echo '<a href="detail.php?id= '.$movie['id'].'"><img class="vignette" src="inc/img/posters/'.$movie['id'].'.jpg"  /></a>' ;
 }
 
 include('./inc/footer.php'); ?>
