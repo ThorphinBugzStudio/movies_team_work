@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <!-- Naviguation du site -->
+    <!-- Navigation du site -->
     <div class="navbar">
       <div class="mx-auto">
         <nav>
@@ -32,6 +32,9 @@
           <a href="#">Lien</a>
           <a href="#">Lien</a>
           <a href="#">Lien</a>
+          <!-- login -->
+          <a href="inscription.php">Inscription</a>
+          <a href="login.php">Login</a>
         </nav>
       </div>
     </div>
