@@ -1,7 +1,7 @@
 
 
 <?php
-include('inc/pdo.php');
+include_once('./inc/required.php');
 include('inc/header.php');
 
   if(!empty($_GET['slug'])) {
