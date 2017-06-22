@@ -6,19 +6,18 @@ if(file_exists('inc/pdo.php')){
 }
 include('inc/function.php');
 
-// requete pour afficher les catégories
 
+// Requête pour afficher les catégories
 $sql= "SELECT genres FROM movies_full";
 
 $query = $pdo->prepare($sql);
 $query->execute();
 $films = $query->fetchAll();
 
-
 $genres = array(
-
 );
 
+// Boucle qui cherchera tous les films dans la BDD
 foreach($films as $film){
 $categories_by_film = $film['genres'];
 
@@ -40,15 +39,10 @@ foreach($cats as $cat){
 }
 // debugg($genres);
 
-
-
-
-
 $title = 'Accueil';
 
-// requete pour afficher les 10 premiers films
-
-$sql = "SELECT id FROM movies_full ORDER BY RAND() LIMIT 12 ";
+// Requête pour afficher les 12 premiers films
+$sql = "SELECT id FROM movies_full ORDER BY RAND() LIMIT 12";
 $query = $pdo->prepare($sql);
         $query->execute();
         $movies = $query->fetchAll();
@@ -57,7 +51,7 @@ include('inc/header.php'); ?>
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-xl-9 col-lg-9 col-sm-12">
+    <div class="col-xl-10 col-lg-10 col-sm-12">
       <div class="movies_grid">
         <?php
         foreach ($movies as $movie) {
@@ -73,8 +67,8 @@ include('inc/header.php'); ?>
 
     </div>
 
-    <div class="col-xl-3 col-lg-3 col-sm-12">
-      <!-- Widget : Rechercher -->
+    <div class="col-xl-2 col-lg-2 col-sm-12">
+      <!-- WIDGET : Rechercher -->
       <div class="search-form">
         <div class="widget_title row">
           <i class="fa fa-angle-double-right" aria-hidden="true"></i>
@@ -98,8 +92,8 @@ include('inc/header.php'); ?>
           <ul class="search_category">
             <?php foreach($genres as $genre){ ?>
               <li>
-                <label for="category"><?php echo $genre ?></label>
-                <input type="checkbox" name="<?php echo $genre ?>" value="">
+                <label for="category"><input type="checkbox" name="<?php echo $genre ?>" value=""/><?php echo $genre ?></label>
+
               </li>
               <?php  } ?>
             </ul>

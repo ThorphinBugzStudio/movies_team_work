@@ -144,6 +144,8 @@
 
 .search-form {
   height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 8px 8px;
 }
 
 .search-form h2 i {
@@ -160,6 +162,7 @@
   background-color: #4d4d4d;
   padding: 0 4px;
   border-radius: 50px;
+  margin: 0 6px;
 }
 
 .sub-category h3, .sub-category i {
@@ -184,12 +187,23 @@
 .search_category li label {
   margin: 0;
   font-family: 'Josefin Sans', sans-serif;
+  display: block;
+  padding-left: 20px;
+  text-indent: -15px;
+}
+
+.search_category li input {
+  margin-right: 6px;
+  vertical-align: sub;
+  position: relative;
+  top: -1px;
+  overflow: hidden;
 }
 
 .delete_all {
   text-align: center;
   font-family: 'Josefin Sans', sans-serif;
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 /*------------------ FOOTER ---------------- */
