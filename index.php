@@ -11,13 +11,14 @@ include_once('./inc/required.php');
 
 // requete pour afficher les genres années popularités
 
-$sql= "SELECT genres,year,popularity FROM movies_full";
+$sql= "SELECT genres,year,popularity FROM movies_full ORDER BY year ASC";
 
 $query = $pdo->prepare($sql);
 $query->execute();
 $films = $query->fetchAll();
 
 $title = 'Accueil';
+$success = false;
 
 // Gestion des erreurs de formulaire
 if(!empty($_POST['submitForm']))
@@ -120,28 +121,81 @@ $query = $pdo->prepare($sql);
         $query->execute();
         $movies = $query->fetchAll();
 
-?>
 
-
-<!--//requete de recherche avec options
+//requete de recherche avec options
 
 if(!empty($_POST['submit']))
 {
-  $search_content = trim(strip_tags($_POST['search-content']));
-  $options = trim(strip_tags($_POST['category']));
 
+  $search_content = trim(strip_tags($_POST['search-content']));
+  $category = $_POST['category'];
+  $year_of_prod = $_POST['year-of-prod'];
+  $ratings = $_POST['ratings'];
+  debugg($category);
+
+
+   $sql = "SELECT * FROM movies_full WHERE 1=1 ";
+
+   if(!empty($category)){
+     foreach ($category as $cate ) {
+       $sql .= "AND genres = $cate ";
+     }
+   }
+
+   if(!empty($year_of_prod)){
+     foreach($year_of_prod as $year){
+       $sql .= "AND year = $year ";
+     }
+   }
+
+   if(!empty($ratings)){
+     foreach($ratings as $rate){
+       $sql .= "AND rating = $rate ";
+     }
+   }
+
+   if(!empty($search_content)){
+
+     $sql .= "AND title LIKE '%$search_content%'
+              OR plot LIKE '%$search_content%'
+              OR directors LIKE '%$search_content%'
+              OR cast LIKE '%$search_content%'
+              OR writers LIKE '%$search_content%'
+              ";
+
+   }
+           $query = $pdo->prepare($sql);
+           $query->execute();
+           $results = $query->fetchAll();
+
+           $success = true;
+
+} else {
+
+  //aucun élément de requete
 }
 
-$sql = "SELECT * FROM movies_full WHERE 1=1 AND "; -->
+?>
+
 
 <div class="container-fluid">
   <div class="row">
     <div class="col-xl-10 col-lg-10 col-sm-12">
       <div class="movies_grid">
         <?php
-        foreach ($movies as $movie) {
-          $slug = $movie['slug'];
-          afficherImage($movie);
+        if($success==false){
+//Afficher les 10 films au hasard
+          foreach ($movies as $movie) {
+            $slug = $movie['slug'];
+            afficherImage($movie);
+          }
+
+        } else {
+//Afficher les résultats de recherche
+          foreach($results as $result){
+
+            afficherImage($result);
+          }
         }
         ?>
       </div>
@@ -161,7 +215,7 @@ $sql = "SELECT * FROM movies_full WHERE 1=1 AND "; -->
         </div>
 
         <div class="input-group">
-          <form class="" action="index.html" method="post">
+          <form class="" action="" method="post">
             <input type="text" class="form-control w-100" name="search-content" placeholder="Rechercher...">
             <span class="input-group-btn">
               <input class="btn btn-secondary" type="submit" name="submit"><i class="fa fa-search" aria-hidden="true"></i>
@@ -178,7 +232,7 @@ $sql = "SELECT * FROM movies_full WHERE 1=1 AND "; -->
           <ul class="search_category">
             <?php foreach($genres as $genre){ ?>
               <li>
-                <label for="category"><input type="checkbox" class="category-box" name="category" value=""/><?php echo $genre ?></label>
+                <label for="category"><input type="checkbox" class="category-box" name="category[]" value="<?php echo $genre ?>"/><?php echo $genre ?></label>
               </li>
               <?php  } ?>
             </ul>
@@ -192,7 +246,7 @@ $sql = "SELECT * FROM movies_full WHERE 1=1 AND "; -->
           <ul class="search_category">
             <?php foreach($prods as $prod){ ?>
               <li>
-                <label for="years"><input class="category-box" type="checkbox" name="year-of-prod" value=""><?php echo $prod ?></label>
+                <label for="years"><input class="category-box" type="checkbox" name="year-of-prod[]" value="<?php echo $prod ?>"><?php echo $prod ?></label>
               </li>
             <?php  } ?>
           </ul>
@@ -203,14 +257,14 @@ $sql = "SELECT * FROM movies_full WHERE 1=1 AND "; -->
             <h3>Popularité</h3>
           </div>
           <label for="pops">Popularités</label>
-          <label for="popularities">10 à 25</label>
-          <input class="category-box" type="checkbox" name="popularities" value="">
-          <label for="popularities">26 à 50</label>
-          <input class="category-box" type="checkbox" name="popularities" value="">
-          <label for="popularities">51 à 75</label>
-          <input class="category-box" type="checkbox" name="popularities" value="">
-          <label for="popularities">76 à 100</label>
-          <input class="category-box" type="checkbox" name="popularities" value="">
+          <label for="ratings">10 à 25</label>
+          <input class="category-box" type="checkbox" name="ratings[]" value="<?php echo '10 à 25' ?>">
+          <label for="ratings">26 à 50</label>
+          <input class="category-box" type="checkbox" name="ratings[]" value="<?php echo '26 à 50' ?>">
+          <label for="ratings">51 à 75</label>
+          <input class="category-box" type="checkbox" name="ratings[]" value="<?php echo '51 à 75' ?>">
+          <label for="ratings">76 à 100</label>
+          <input class="category-box" type="checkbox" name="ratings[]" value="<?php echo '76 à 100' ?>">
         </div>
       </form>
     </div>
