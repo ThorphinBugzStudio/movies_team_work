@@ -9,7 +9,7 @@
    include_once('./inc/required.php');
 
    // Titre Page
-   $title = 'UserLog - Deconnect';
+   $title = 'Déconnexion';
 
    // destroy session
    session_destroy();
