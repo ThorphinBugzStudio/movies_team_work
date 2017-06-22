@@ -21,12 +21,10 @@
   padding: 12px;
 }
 
-.userBanner i {
-  margin-right: 4px;
-}
-
 .userBanner a {
-  margin: 0 20px 0 0;
+  margin: 0 20px 0 4px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 18px;
 }
 
 .userBanner i, .userBanner a {
@@ -34,8 +32,18 @@
   text-decoration: none;
 }
 
-.userBanner i:hover, .userBanner a:hover {
+.userBanner i:hover, .userBanner span:hover {
   color: #ffd800;
+}
+
+@media (max-width: 576px) {
+  .userBanner a span {
+    display: none;
+  }
+  .userBanner i {
+    margin: 0 4px;
+    cursor: pointer;
+  }
 }
 
 .mainBanner {
@@ -172,9 +180,13 @@
   color: red;
   background: linear-gradient(90deg, #fff2f2, #fff 50%);
   font-family: 'Josefin Sans', sans-serif;
-  padding: 4px;
   font-size: 13px;
   border-radius: 4px;
+}
+
+.alert-danger, .alert-success {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 20px;
 }
 
 .spacer-y-10 {

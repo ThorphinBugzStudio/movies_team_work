@@ -7,7 +7,7 @@
    include_once('./inc/required.php');
 
    // Titre Page
-   $title = 'UserLog - Inscription';
+   $title = 'Inscription';
 
    //Tableau d'erreur Formulaire -- Tests ok
    $errors = array();
@@ -153,7 +153,7 @@
    <!-- sinon message form ok + bouton lien vers index -->
       <div class="row col-5 mt-2 justify-content-center">
          <h3 class="alert alert-success w-100 text-center">Nouvel utilisateur enregistré, merci !</h3>
-         <a href="inscription.php"><button type="button" class="btn btn-info">Retour</button></a>
+         <a href="inscription.php"><button type="button" class="btn_cancel">Retour</button></a>
       </div>
    <?php } ?>
 

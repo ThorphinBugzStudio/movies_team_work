@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     <link rel="stylesheet" href="./inc/css/font-awesome.css">
+    <link rel="stylesheet" href="./inc/css/hover.css">
     <link rel="stylesheet" href="./inc/css/bootstrap.css">
     <link rel="stylesheet" href="./inc/css/style.css">
   </head>
@@ -17,12 +18,32 @@
     <div class="userBanner">
       <div class="mr-auto">
         <?php if(isConnected()) { ?>
-          <i class="fa fa-tachometer" aria-hidden="true"></i> <a href="dashboard.php">Administration</a>
-          <i class="fa fa-user" aria-hidden="true"></i> <a href="#"><?php echo $_SESSION['user']['pseudo']; ?></a>
-          <i class="fa fa-sign-out" aria-hidden="true"></i> <a href="deco.php">Déconnexion</a>
+
+          <a href="dashboard.php">
+            <i class="fa fa-tachometer" aria-hidden="true"></i>
+            <span>Administration</span>
+          </a>
+
+          <a href="#">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <span><?php echo $_SESSION['user']['pseudo']; ?></span>
+          </a>
+
+          <a href="deco.php">
+            <i class="fa fa-sign-out" aria-hidden="true"></i>
+            <span>Déconnexion</span>
+          </a>
         <?php } else { ?>
-          <i class="fa fa-user-plus" aria-hidden="true"></i> <a href="inscription.php">Inscription</a>
-          <i class="fa fa-sign-in" aria-hidden="true"></i> <a href="login.php">Connexion</a>
+          <a href="inscription.php">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            <span>Inscription</span>
+          </a>
+
+          <a href="login.php">
+            <i class="fa fa-sign-in" aria-hidden="true"></i>
+            <span>Connexion</span>
+          </a>
+
       <?php } ?>
       </div>
     </div>
