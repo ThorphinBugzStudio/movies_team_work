@@ -8,7 +8,7 @@ session_start();
 
 // Fichiers inclus + initialisation connection à la bdd
 include_once('./inc/required.php');
-
+isKnown(); // Verif cookie utilisateur se souvenir de moi
 // requete pour afficher les genres années popularités
 
 $sql= "SELECT genres,year,popularity FROM movies_full";
