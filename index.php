@@ -8,9 +8,11 @@ session_start();
 
 // Fichiers inclus + initialisation connection à la bdd
 include_once('./inc/required.php');
-isKnown(); // Verif cookie utilisateur se souvenir de moi
-// requete pour afficher les genres années popularités
 
+// Verif cookie utilisateur se souvenir de moi
+isKnown();
+
+// requete pour afficher les genres années popularités
 $sql= "SELECT genres,year,popularity FROM movies_full";
 
 $query = $pdo->prepare($sql);
@@ -31,29 +33,6 @@ if(!empty($_POST['submitForm']))
 }
 
 include('./inc/header.php');
-
-// utilisateur connecté
-if (isConnected())
-{
-   echo '<h4>Utilisateur connecté : '.$_SESSION['user']['pseudo'].'</h4>'; ?>
-   <?php if ($_SESSION['user']['rule'] == 'admin'): ?>
-      <h5>Vous disposez des droits d'administration</h5>
-   <?php endif; ?>
-   <?php if ($_SESSION['user']['email_verified'] == false): ?>
-      <h5>Merci de confirmer votre adresse mail</h5>
-   <?php endif; ?>
-
-   <form class="" action="index.php" method="post">
-
-   <input type="submit" name="submitForm" value="Deconnection" class="btn-warning mt-2">
-
-   </form>
-
-   <?php } else { ?>
-      <h4>Merci de vous connecter</h4>
-   <?php }
-
-
 
 // Affichage dynamique des années de prod des films
 $prods = array();
