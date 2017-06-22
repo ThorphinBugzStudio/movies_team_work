@@ -109,32 +109,44 @@
 <!-- Formulaire inscription -->
 
 <!-- INSCRIPTION D UN UTILISATEUR -->
-<div class="row justify-content-center">
+<div class="container-fluid row justify-content-center">
 
    <!-- Affichage formulaire si formulaire mal ou non rempli -->
    <?php if (!$successForm)
    { ?>
 
       <form class="newPost mt-2" action="" method="post">
-         <h3>Nouvel utilisateur :</h3>
+        <div class="page_title row">
+          <i class="fa fa-user-plus" aria-hidden="true"></i>
+          <h2 class="my-auto">Inscription</h2>
+        </div>
+        <div class="inscription_content">
+          <label class="" for="userPseudo">Pseudo :</label>
+          <div class="alert-warning"><?php if (!empty($errors['ErrPseudo'])) {echo $errors['ErrPseudo'].'<br />';} ?></div>
+          <input type="text" name="userPseudo" value="<?php if (!empty($_POST['userPseudo'])) {echo $_POST['userPseudo'];} ?>" size="100"><br />
 
-         <label class="mt-2" for="userPseudo">Pseudo :</label>
-         <div class="alert-warning"><?php if (!empty($errors['ErrPseudo'])) {echo $errors['ErrPseudo'].'<br />';} ?></div>
-         <input type="text" name="userPseudo" value="<?php if (!empty($_POST['userPseudo'])) {echo $_POST['userPseudo'];} ?>" size="100"><br />
+          <div class="spacer-y-10"></div>
 
-         <label class="mt-2" for="userEmail">Email :</label>
-         <div class="alert-warning"><?php if (!empty($errors['ErrMail'])) {echo $errors['ErrMail'].'<br />';} ?></div>
-         <input type="email" name="userEmail" value="<?php if (!empty($_POST['userEmail'])) {echo $_POST['userEmail'];} ?>" size="100"><br />
+          <label class="" for="userEmail">Email :</label>
+          <div class="alert-warning"><?php if (!empty($errors['ErrMail'])) {echo $errors['ErrMail'].'<br />';} ?></div>
+          <input type="email" name="userEmail" value="<?php if (!empty($_POST['userEmail'])) {echo $_POST['userEmail'];} ?>" size="100"><br />
 
-         <label class="mt-2" for="userPassword">Mot de passe :</label>
-         <div class="alert-warning"><?php if (!empty($errors['ErrPassword'])) {echo $errors['ErrPassword'].'<br />';} ?></div>
-         <input type="password" name="userPassword" value="<?php if (!empty($_POST['userPassword'])) {echo $_POST['userPassword'];} ?>" size="100"><br />
+          <div class="spacer-y-10"></div>
 
-         <div><label class="mt-2" for="userPasswordConfirm">Confirmation mot de passe :</label></div>
-         <input type="password" name="userPasswordConfirm" value="<?php if (!empty($_POST['userPasswordConfirm'])) {echo $_POST['userPasswordConfirm'];} ?>" size="100"><br />
+          <label class="" for="userPassword">Mot de passe :</label>
+          <div class="alert-warning"><?php if (!empty($errors['ErrPassword'])) {echo $errors['ErrPassword'].'<br />';} ?></div>
+          <input type="password" name="userPassword" value="<?php if (!empty($_POST['userPassword'])) {echo $_POST['userPassword'];} ?>" size="100"><br />
 
-         <input type="submit" name="submitForm" value="Annuler" class="btn-warning mt-2">
-         <input type="submit" name="submitForm" value="Ajouter" class="btn-success mt-2">
+          <div class="spacer-y-10"></div>
+
+          <div><label class="" for="userPasswordConfirm">Confirmation mot de passe :</label></div>
+          <input type="password" name="userPasswordConfirm" value="<?php if (!empty($_POST['userPasswordConfirm'])) {echo $_POST['userPasswordConfirm'];} ?>" size="100"><br />
+
+          <div class="btn_under_form">
+            <input type="submit" name="submitForm" value="S'inscrire" class="btn_validate">
+            <input type="submit" name="submitForm" value="Annuler" class="btn_cancel">
+          </div>
+        </div>
 
       </form>
    <?php } else { ?>
