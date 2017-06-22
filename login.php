@@ -53,7 +53,7 @@ if(!empty($_POST['submitForm']))
    {
 
       // test si pseudo ou adresse mail existent ET mot de passe ok
-      $sql = "SELECT id, pseudo, email, password, rule FROM users WHERE (pseudo = :pseudo OR email = :pseudo)";
+      $sql = "SELECT id, pseudo, email, email_verified, password, rule FROM users WHERE (pseudo = :pseudo OR email = :pseudo)";
       $query = $pdo->prepare($sql);
       $query->bindValue(':pseudo', $userPseudo, PDO::PARAM_STR);
       $query->execute();
@@ -70,6 +70,7 @@ if(!empty($_POST['submitForm']))
                'id'       => $result['id'],
                'pseudo'   => $result['pseudo'],
                'email'    => $result['email'],
+               'email_verified'    => $result['email_verified'],
                'rule'     => $result['rule'],
                'ip'       => get_ip()
             );

@@ -101,7 +101,7 @@
          <input type="text" name="userPassword" value="<?php if (!empty($_POST['userPassword'])) {echo $_POST['userPassword'];} ?>" size="100"><br />
 
          <div><label class="mt-2" for="userPasswordConfirm">Confirmation mot de passe :</label></div>
-         <input type="text" name="userPasswordConfirm" value="<?php if (!empty($_POST['userPasswordConfirm'])) {echo $_POST['userPasswordConfirm'];} ?>" size="100"><br />
+         <input type="password" name="userPasswordConfirm" value="<?php if (!empty($_POST['userPasswordConfirm'])) {echo $_POST['userPasswordConfirm'];} ?>" size="100"><br />
 
          <input type="submit" name="submitForm" value="Enregistré" class="btn-success mt-2">
          <input type="submit" name="submitForm" value="Annuler" class="btn-warning mt-2">

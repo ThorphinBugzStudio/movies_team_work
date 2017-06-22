@@ -31,6 +31,9 @@ if (isConnected())
    <?php if ($_SESSION['user']['rule'] == 'admin'): ?>
       <h5>Vous disposez des droits d'administration</h5>
    <?php endif; ?>
+   <?php if ($_SESSION['user']['email_verified'] == false): ?>
+      <h5>Merci de confirmer votre adresse mail</h5>
+   <?php endif; ?>
 
    <form class="" action="index.php" method="post">
 
