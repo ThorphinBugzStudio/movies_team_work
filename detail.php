@@ -1,8 +1,8 @@
-
-
 <?php
 include_once('./inc/required.php');
 include('inc/header.php');
+include('inc/function-favoris.php');
+session_start();
 
   if(!empty($_GET['slug'])) {
     $slug = $_GET['slug'];
@@ -33,8 +33,19 @@ include('inc/header.php');
    header('Location: redirection404.php');
   }
 
+if ( !empty($_POST['btn-sub']) ) {
+
+setcookie('favoris', $movie['id'] , (time() + 3600));
+
+    header('Location: favoris.php');
+}
 
 ?>
+<form action="" method="POST">
+    <input type="submit" name="btn-sub" class="btn btn-primary" value="favoris" /><br>
+</form>
+
+
 <!-- Facebook -->
 <!-- Include the SDK JavaScript on your page once, ideally right after the opening <body> tag. -->
 <div id="fb-root"></div>
