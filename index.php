@@ -6,9 +6,9 @@ if(file_exists('inc/pdo.php')){
 }
 include('inc/function.php');
 
-// requete pour afficher les catégories
+// requete pour afficher les genres années popularités
 
-$sql= "SELECT genres FROM movies_full";
+$sql= "SELECT genres,year,popularity FROM movies_full";
 
 $query = $pdo->prepare($sql);
 $query->execute();
@@ -38,9 +38,33 @@ foreach($cats as $cat){
   }
 }
 }
-// debugg($genres);
+
+// foreach pour afficher les années
+$prods = array();
+
+foreach($films as $film){
+
+$year_by_film = $film['year'];
+
+$years = explode( ",", $year_by_film);
 
 
+foreach($years as $year){
+  $exist = false;
+  $year = trim($year);
+
+  foreach($prods as $prod){
+    if($prod == $year){
+      $exist = true;
+      //  die('here');
+    }
+  }
+  if($exist == false){
+
+    $prods[$year] = $year;
+  }
+}
+}
 
 
 
@@ -52,6 +76,17 @@ $sql = "SELECT id FROM movies_full ORDER BY RAND() LIMIT 10 ";
 $query = $pdo->prepare($sql);
         $query->execute();
         $movies = $query->fetchAll();
+
+//requete de recherche avec options
+
+if(!empty($_POST['submit']))
+{
+  $search_content = trim(strip_tags($_POST['search-content']));
+  $options = trim(strip_tags($_POST['category']));
+
+}
+
+$sql = "SELECT * FROM movies_full WHERE 1=1 AND ";
 
 include('inc/header.php'); ?>
 
@@ -72,30 +107,46 @@ include('inc/header.php'); ?>
 </div>
 
 <div class="search-form">
-  <input type="submit" name="search" value="rechercher">
-  <input type="text" name="search-content" value="">
-  <input type="button" name="filter" value="filtres">
+  <form class="" action="index.html" method="post">
+
+    <input type="submit" name="submit" value="rechercher">
+    <input type="text" name="search-content" value="">
+    <input id="filter" type="button" name="filter" value="filtres">
+
+    <div id="options" class="hidden">
+      <label for="erase">Tout effacer</label>
+      <input id="erase-all" type="checkbox" name="erase" value="">
+
+      <label for="categories">Categories</label>
+
+      <?php foreach($genres as $genre){ ?>
+
+        <label for="category"><?php echo $genre ?></label>
+        <input class="category-box" type="checkbox" name="category" value="">
+
+      <?php  } ?>
+
+      <?php foreach($prods as $prod){ ?>
+
+        <label for="years"><?php echo $prod ?></label>
+        <input class="category-box" type="checkbox" name="year-of-prod" value="">
+
+    <?php  } ?>
+
+      <label for="pops">Popularités</label>
+      <label for="popularities">10 à 25</label>
+      <input class="category-box" type="checkbox" name="popularities" value="">
+      <label for="popularities">26 à 50</label>
+      <input class="category-box" type="checkbox" name="popularities" value="">
+      <label for="popularities">51 à 75</label>
+      <input class="category-box" type="checkbox" name="popularities" value="">
+      <label for="popularities">76 à 100</label>
+      <input class="category-box" type="checkbox" name="popularities" value="">
+
+      </div>
+  </form>
 </div>
 
-<div class="hidden options">
-  <label for="erase">Tout effacer</label>
-  <input type="checkbox" name="all" value="">
-
-  <label for="categories">Categories</label>
-
-    <?php foreach($genres as $genre){ ?>
-
-      <label for="category"><?php echo $genre ?></label>
-      <input type="checkbox" name="<?php echo $genre ?>" value="">
-
-  <?php  } ?>
-
-
-
-
-
-
-</div>
 
 <?php
 function afficherImage($movie) {
