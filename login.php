@@ -53,7 +53,7 @@ if(!empty($_POST['submitForm']))
    {
 
       // test si pseudo ou adresse mail existent ET mot de passe ok
-      $sql = "SELECT id, pseudo, email, email_verified, password, rule FROM users WHERE (pseudo = :pseudo OR email = :pseudo)";
+      $sql = "SELECT id, pseudo, email, email_verified, token, password, rule FROM users WHERE (pseudo = :pseudo OR email = :pseudo)";
       $query = $pdo->prepare($sql);
       $query->bindValue(':pseudo', $userPseudo, PDO::PARAM_STR);
       $query->execute();
@@ -71,6 +71,7 @@ if(!empty($_POST['submitForm']))
                'pseudo'   => $result['pseudo'],
                'email'    => $result['email'],
                'email_verified'    => $result['email_verified'],
+               'token'    => $result['token'],
                'rule'     => $result['rule'],
                'ip'       => get_ip()
             );
@@ -125,7 +126,18 @@ if(!empty($_POST['submitForm']))
    <?php } else { ?>
    <!-- sinon message form ok + bouton lien vers index -->
       <div class="row col-5 mt-2 justify-content-center">
-         <h3 class="alert alert-success w-100 text-center">Felicitations <?php echo $result['pseudo']; ?>. vous êtes connecté</h3>
+         <?php if ($_SESSION['user']['email_verified'] == false)
+         {
+            $lien = './verif_email.php?email='.urlencode($_SESSION['user']['email']).'&token='.urlencode($_SESSION['user']['token']); ?>
+            <h5>Merci de cliquer sur le lien contenu dans l'email que nous vous avons transmis pour finaliser votre inscription</h5>
+            <!-- affichage du lien qui serai normalement envoyé à l'utilisateur avec un Mail -->
+            <a class="col-12 text-center" href="<?php echo $lien; ?>"><?php echo $lien; ?></a>
+         <?php }
+         else
+         { ?>
+            <h3 class="alert alert-success w-100 text-center">Felicitations <?php echo $result['pseudo']; ?>. vous êtes connecté</h3>
+         <?php } ?>
+
          <a href="./index.php"><button type="button" class="btn btn-info">Ok</button></a>
       </div>
    <?php } ?>
