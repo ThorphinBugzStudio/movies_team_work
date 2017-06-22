@@ -13,6 +13,31 @@
 
 /*------------------ HEADER ---------------- */
 
+.userBanner {
+  background-color: #1d1d1d;
+  color: white;
+  width: 100%;
+  text-align: right;
+  padding: 12px;
+}
+
+.userBanner i {
+  margin-right: 4px;
+}
+
+.userBanner a {
+  margin: 0 20px 0 0;
+}
+
+.userBanner i, .userBanner a {
+  color: white;
+  text-decoration: none;
+}
+
+.userBanner i:hover, .userBanner a:hover {
+  color: #ffd800;
+}
+
 .mainBanner {
   background-color: grey;
   background: linear-gradient(
@@ -45,10 +70,8 @@
   width: 100%;
   text-align: center;
   padding: 20px;
-  /*border-top: 1px solid #ffd800;
-  border-bottom: 1px solid #ffd800;*/
   margin-bottom: 20px;
-  box-shadow: 0 -1px 8px 2px
+  box-shadow: 0 -1px 8px 2px;
 }
 
 .navbar a {
@@ -64,6 +87,8 @@
 .navbar a:hover {
   color: #ffd800;
 }
+
+
 
 /*------------------ MAIN ---------------- */
 
@@ -210,10 +235,11 @@
   margin-left: 15px;
 }
 
-/* ------------- CATÉGORIES ---------------- */
-
-.search_category li label {
-  margin: 0;
+.btn-secondary {
+  font-family: "Fontawesome";
+  width: 0;
+  padding: 8px 23px 8px 9px;
+  cursor: pointer;
 }
 
 /*------------------ FOOTER ---------------- */

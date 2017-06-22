@@ -6,15 +6,28 @@
     <meta name="keywords" content="cinéma, cinema, film, films, poster, posters, cinématographie, acteur, acteurs, réalisateur, réalisateurs, producteur, producteurs, vidéo, vidéos, video, videos, movies full, movie, movies, actor, actors, prodducer, producers, character, characters">
     <title>Movies Full » <?php if(empty($title)) { echo ''; } else { echo $title; } ?></title>
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     <link rel="stylesheet" href="./inc/css/font-awesome.css">
     <link rel="stylesheet" href="./inc/css/bootstrap.css">
     <link rel="stylesheet" href="./inc/css/style.css">
   </head>
   <body>
 
-    <div style="height: 3px; background-color: #1d1d1d;"></div>
-    <div style="height: 3px; background-color: #ffd800;"></div>
+    <!-- Bannière pour Inscription/ (Dé)Connexion / Profil utilisateur -->
+    <div class="userBanner">
+      <div class="mr-auto">
+        <?php if(isConnected()) { ?>
+          <i class="fa fa-user" aria-hidden="true"></i> <a href="#"><?php echo $_SESSION['user']['pseudo']; ?></a>
+          <i class="fa fa-sign-out" aria-hidden="true"></i> <a href="deco.php">Déconnexion</a>
+        <?php } else { ?>
+          <i class="fa fa-user-plus" aria-hidden="true"></i> <a href="inscription.php">Inscription</a>
+          <i class="fa fa-sign-in" aria-hidden="true"></i> <a href="login.php">Connexion</a>
+      <?php } ?>
+      </div>
+    </div>
+
+    <!-- Décoration -->
+    <div style="height: 2px; background-color: #ffd800;"></div>
 
     <!-- Titre & logo du site -->
     <div class="mainBanner img-fluid mx-auto">
@@ -33,9 +46,6 @@
           <a href="#">Lien</a>
           <a href="#">Lien</a>
           <a href="#">Lien</a>
-          <!-- login -->
-          <a href="inscription.php">Inscription</a>
-          <a href="login.php">Login</a>
         </nav>
       </div>
     </div>
