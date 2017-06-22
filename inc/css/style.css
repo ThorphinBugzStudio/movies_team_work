@@ -88,13 +88,7 @@
   color: #ffd800;
 }
 
-
-
 /*------------------ MAIN ---------------- */
-
-.hidden {
-  display: none;
-}
 
 .float_right {
   float: right;
@@ -147,6 +141,98 @@
   .btn_more_movies {
     margin-bottom: 10px;
   }
+}
+
+/* ------------- AUTRES -------------- */
+
+.page_title {
+  background-color: #1d1d1d;
+  margin-bottom: 0;
+  font-size: 30px;
+}
+
+.page_title h2 {
+  font-family: "Kaushan Script";
+  font-size: 25px;
+  color: white;
+  margin-bottom: 0;
+  padding-left: 5px;
+}
+
+.page_title i {
+  color: #ffd800;
+  padding: 10px;
+  border-right: 1px solid grey;
+}
+.hidden {
+  display: none;
+}
+
+.alert-warning {
+  color: red;
+  background: linear-gradient(90deg, #fff2f2, #fff 50%);
+  font-family: 'Josefin Sans', sans-serif;
+  padding: 4px;
+  font-size: 13px;
+  border-radius: 4px;
+}
+
+.spacer-y-10 {
+  margin: 10px 0;
+}
+
+/* ------------- INSCRIPTION -------------- */
+
+.inscription_content {
+  padding: 25px;
+  box-shadow: 0 0 11px -3px;
+  border-radius: 0 0 8px 8px;
+}
+
+.inscription_content label {
+  margin-bottom: 0;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.inscription_content input:not(.btn_validate):not(.btn_cancel) {
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid grey;
+}
+
+.btn_cancel, .btn_validate  {
+  padding: 10px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-family: 'Josefin Sans', sans-serif;
+  cursor: pointer;
+}
+
+.btn_cancel {
+  background-color: #1d1d1d;
+  border: 1px solid black;
+  color: white;
+}
+
+.btn_cancel:hover {
+  background-color: #535353;
+  border: 1px solid #262626;
+}
+
+.btn_validate {
+  background-color: #ffdd1e;
+  border: 1px solid #e1b76b;
+  color: black;
+}
+
+.btn_validate:hover {
+  background-color: #f2ac20;
+  border: 1px solid #e68b32;
+}
+
+.btn_under_form {
+  padding: 20px 0 0 0;
+  text-align: center;
 }
 
 /* ------------- CATÉGORIES ---------------- */

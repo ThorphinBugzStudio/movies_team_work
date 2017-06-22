@@ -17,6 +17,7 @@
     <div class="userBanner">
       <div class="mr-auto">
         <?php if(isConnected()) { ?>
+          <i class="fa fa-tachometer" aria-hidden="true"></i> <a href="dashboard.php">Administration</a>
           <i class="fa fa-user" aria-hidden="true"></i> <a href="#"><?php echo $_SESSION['user']['pseudo']; ?></a>
           <i class="fa fa-sign-out" aria-hidden="true"></i> <a href="deco.php">Déconnexion</a>
         <?php } else { ?>
@@ -42,8 +43,6 @@
       <div class="mx-auto">
         <nav>
           <a href="index.php">Accueil</a>
-          <a href="#">Lien</a>
-          <a href="#">Lien</a>
           <a href="#">Lien</a>
           <a href="#">Lien</a>
         </nav>
