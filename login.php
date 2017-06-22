@@ -20,7 +20,6 @@ $successForm = false;
 // Gestion des erreurs de formulaire
 if(!empty($_POST['submitForm']))
 {
-
    // Redirige vers index.php si bouton annuler pressé
    if ($_POST['submitForm'] == 'Annuler')
    {
@@ -77,6 +76,13 @@ if(!empty($_POST['submitForm']))
             );
 
             $successForm = true;
+
+            // Se souvenir de moi
+            if(!empty($_POST['check']))
+            {
+               setcookie('userFullMovie', $_SESSION['user']['id'], mktime(time()+60*60*24*30));
+               echo $_COOKIE['userFullMovie'];
+            }
          }
          else
          {
@@ -117,6 +123,8 @@ if(!empty($_POST['submitForm']))
          <label class="mt-2" for="userPassword">Mot de passe :</label>
          <div class="alert-warning"><?php if (!empty($errors['ErrPassword'])) {echo $errors['ErrPassword'].'<br />';} ?></div>
          <input type="password" name="userPassword" value="<?php if (!empty($_POST['userPassword'])) {echo $_POST['userPassword'];} ?>" size="100"><br />
+
+         <input type="checkbox" name="check" value="true"> Se souvenir de moi</input><br />
 
          <input type="submit" name="submitForm" value="Login" class="btn-success mt-2">
          <input type="submit" name="submitForm" value="Annuler" class="btn-warning mt-2">
