@@ -115,7 +115,7 @@ foreach($films as $film)
 }
 
 // Requête pour afficher les 12 premiers films
-$sql = "SELECT id FROM movies_full ORDER BY RAND() LIMIT 12";
+$sql = "SELECT * FROM movies_full ORDER BY RAND() LIMIT 12";
 $query = $pdo->prepare($sql);
         $query->execute();
         $movies = $query->fetchAll();
@@ -140,7 +140,7 @@ $sql = "SELECT * FROM movies_full WHERE 1=1 AND "; -->
       <div class="movies_grid">
         <?php
         foreach ($movies as $movie) {
-          $id = $movie['id'];
+          $slug = $movie['slug'];
           afficherImage($movie);
         }
         ?>
@@ -219,7 +219,7 @@ $sql = "SELECT * FROM movies_full WHERE 1=1 AND "; -->
 
 <?php
 function afficherImage($movie) {
-  echo '<a href="detail.php?id= '.$movie['id'].'"><img class="vignette" src="inc/img/posters/'.$movie['id'].'.jpg"  /></a>' ;
+  echo '<a href="detail.php?slug='.$movie['slug'].'"><img class="vignette" src="inc/img/posters/'.$movie['id'].'.jpg"  /></a>' ;
 }
 
 include('./inc/footer.php'); ?>
