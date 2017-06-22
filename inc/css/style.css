@@ -67,6 +67,10 @@
 
 /*------------------ MAIN ---------------- */
 
+.hidden {
+  display:none;
+}
+
 .movies_grid {
   display: inline-flex;
 }
