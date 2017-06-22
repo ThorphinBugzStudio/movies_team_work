@@ -48,53 +48,78 @@ $title = 'Accueil';
 
 // requete pour afficher les 10 premiers films
 
-$sql = "SELECT id FROM movies_full ORDER BY RAND() LIMIT 10 ";
+$sql = "SELECT id FROM movies_full ORDER BY RAND() LIMIT 12 ";
 $query = $pdo->prepare($sql);
         $query->execute();
         $movies = $query->fetchAll();
 
 include('inc/header.php'); ?>
 
-<div class="container-fluid row justify-content-center mx-auto">
-  <div class="movies_grid row mx-auto">
-    <?php
-    foreach ($movies as $movie) {
-      $id = $movie['id'];
-      afficherImage($movie);
-    }
-    ?>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-9 col-lg-9 col-sm-12">
+      <div class="movies_grid">
+        <?php
+        foreach ($movies as $movie) {
+          $id = $movie['id'];
+          afficherImage($movie);
+        }
+        ?>
+      </div>
+      <!-- Bouton "+ de films !" -->
+      <div class="justify-content-center btn_more">
+        <a class="btn btn_more_movies" href="index.php" role="button">+ de films !</a>
+      </div>
+
+    </div>
+
+    <div class="col-xl-3 col-lg-3 col-sm-12">
+      <!-- Widget : Rechercher -->
+      <div class="search-form">
+        <div class="widget_title row">
+          <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+          <h2 class="my-auto">Rechercher</h2>
+        </div>
+
+        <div class="input-group">
+          <input type="text" class="form-control" name="search-content" placeholder="Rechercher...">
+          <span class="input-group-btn">
+            <button class="btn btn-secondary" type="button" name="search"><i class="fa fa-search" aria-hidden="true"></i></button>
+          </span>
+        </div>
+        <!-- SOUS-MENU : Filtres -->
+        <div class="sub-category">
+          <i class="fa fa-angle-down float-right btn_filter" aria-hidden="true"></i>
+          <h3>Filtres</h3>
+        </div>
+        <div class="hidden options">
+          <label for="erase" class="delete_all">Tout effacer</label>
+          <input type="checkbox" name="all" value="" class="delete_all">
+          <ul class="search_category">
+            <?php foreach($genres as $genre){ ?>
+              <li>
+                <label for="category"><?php echo $genre ?></label>
+                <input type="checkbox" name="<?php echo $genre ?>" value="">
+              </li>
+              <?php  } ?>
+            </ul>
+          </div>
+
+          <!-- SOUS-MENU : Année -->
+          <div class="sub-category">
+            <i class="fa fa-angle-down float-right btn_filter" aria-hidden="true"></i>
+            <h3>Années</h3>
+          </div>
+
+          <!-- SOUS-MENU : Popularité -->
+          <div class="sub-category">
+            <i class="fa fa-angle-down float-right btn_filter" aria-hidden="true"></i>
+            <h3>Popularité</h3>
+          </div>
+
+        </div>
+    </div>
   </div>
-
-
-  <div class="container row justify-content-center mx-auto">
-    <a class="btn btn_more_movies" href="index.php" role="button">+ de films !</a>
-  </div>
-</div>
-
-<div class="search-form">
-  <input type="submit" name="search" value="rechercher">
-  <input type="text" name="search-content" value="">
-  <input type="button" name="filter" value="filtres">
-</div>
-
-<div class="hidden options">
-  <label for="erase">Tout effacer</label>
-  <input type="checkbox" name="all" value="">
-
-  <label for="categories">Categories</label>
-
-    <?php foreach($genres as $genre){ ?>
-
-      <label for="category"><?php echo $genre ?></label>
-      <input type="checkbox" name="<?php echo $genre ?>" value="">
-
-  <?php  } ?>
-
-
-
-
-
-
 </div>
 
 <?php

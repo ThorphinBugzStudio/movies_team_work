@@ -6,6 +6,7 @@
     <meta name="keywords" content="cinéma, cinema, film, films, poster, posters, cinématographie, acteur, acteurs, réalisateur, réalisateurs, producteur, producteurs, vidéo, vidéos, video, videos, movies full, movie, movies, actor, actors, prodducer, producers, character, characters">
     <title>Movies Full » <?php if(empty($title)) { echo ''; } else { echo $title; } ?></title>
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet"> 
     <link rel="stylesheet" href="./inc/css/font-awesome.css">
     <link rel="stylesheet" href="./inc/css/bootstrap.css">
     <link rel="stylesheet" href="./inc/css/style.css">
