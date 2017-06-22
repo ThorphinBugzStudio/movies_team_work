@@ -56,9 +56,9 @@ if (isConnected())
 
 
 // Affichage dynamique des années de prod des films
-
 $prods = array();
 
+// Boucle qui cherchera tous les films dans la BDD
 foreach($films as $film){
 
 $year_by_film = $film['year'];
@@ -82,7 +82,6 @@ foreach($years as $year){
   }
 }
 }
-
 
 // generation dynamique d'un array contenant les genres de films à partir de la bdd
 $genres = array();
@@ -115,8 +114,8 @@ foreach($films as $film)
    }
 }
 
-// requete pour afficher les 10 premiers films
-$sql = "SELECT id FROM movies_full ORDER BY RAND() LIMIT 10 ";
+// Requête pour afficher les 12 premiers films
+$sql = "SELECT id FROM movies_full ORDER BY RAND() LIMIT 12";
 $query = $pdo->prepare($sql);
         $query->execute();
         $movies = $query->fetchAll();
@@ -124,7 +123,7 @@ $query = $pdo->prepare($sql);
 ?>
 
 
-<!-- //requete de recherche avec options
+<!--//requete de recherche avec options
 
 if(!empty($_POST['submit']))
 {
@@ -135,68 +134,88 @@ if(!empty($_POST['submit']))
 
 $sql = "SELECT * FROM movies_full WHERE 1=1 AND "; -->
 
-
-
-<div class="container-fluid row justify-content-center mx-auto">
-  <div class="movies_grid row mx-auto">
-    <?php
-    foreach ($movies as $movie) {
-      $id = $movie['id'];
-      afficherImage($movie);
-    } ?>
-</div>
-
-<div class="container row justify-content-center mx-auto">
-  <a class="btn btn_more_movies" href="index.php" role="button">+ de films !</a>
-</div>
-
-<div class="search-form">
-  <form class="" action="index.html" method="post">
-
-    <input type="submit" name="submit" value="rechercher">
-    <input type="text" name="search-content" value="">
-    <input id="filter" type="button" name="filter" value="filtres">
-
-    <div id="options" class="hidden">
-      <label for="erase">Tout effacer</label>
-      <input id="erase-all" type="checkbox" name="erase" value="">
-
-      <label for="categories">Categories</label>
-
-      <?php foreach($genres as $genre){ ?>
-
-        <label for="category"><?php echo $genre ?></label>
-        <input class="category-box" type="checkbox" name="category" value="">
-
-        <?php  } ?>
-        <?php foreach($prods as $prod){ ?>
-
-
-        <label for="years"><?php echo $prod ?></label>
-        <input class="category-box" type="checkbox" name="year-of-prod" value="">
-
-        <?php  } ?>
-
-        <label for="pops">Popularités</label>
-        <label for="popularities">10 à 25</label>
-        <input class="category-box" type="checkbox" name="popularities" value="">
-        <label for="popularities">26 à 50</label>
-        <input class="category-box" type="checkbox" name="popularities" value="">
-        <label for="popularities">51 à 75</label>
-        <input class="category-box" type="checkbox" name="popularities" value="">
-        <label for="popularities">76 à 100</label>
-        <input class="category-box" type="checkbox" name="popularities" value="">
-
-</div>
-
-
-
-
-
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-10 col-lg-10 col-sm-12">
+      <div class="movies_grid">
+        <?php
+        foreach ($movies as $movie) {
+          $id = $movie['id'];
+          afficherImage($movie);
+        }
+        ?>
       </div>
-  </form>
-</div>
+      <!-- Bouton "+ de films !" -->
+      <div class="justify-content-center btn_more">
+        <a class="btn btn_more_movies" href="index.php" role="button">+ de films !</a>
+      </div>
 
+    </div>
+
+    <div class="col-xl-2 col-lg-2 col-sm-12">
+      <!-- WIDGET : Rechercher -->
+      <div class="search-form">
+        <div class="widget_title row">
+          <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+          <h2 class="my-auto">Rechercher</h2>
+        </div>
+
+        <div class="input-group">
+          <form class="" action="index.html" method="post">
+            <input type="text" class="form-control w-100" name="search-content" placeholder="Rechercher...">
+            <span class="input-group-btn">
+              <input class="btn btn-secondary" type="submit" name="submit"><i class="fa fa-search" aria-hidden="true"></i>
+            </span>
+        </div>
+        <!-- SOUS-MENU : Filtres -->
+        <div class="sub-category">
+          <i class="fa fa-angle-down float-right btn_filter" id="filter" aria-hidden="true"></i>
+          <h3>Filtres</h3>
+        </div>
+        <div class="hidden"id="options">
+          <label for="erase" class="delete_all">Tout effacer</label>
+          <input type="checkbox" id="erase-all" name="erase" value="" class="delete_all">
+          <ul class="search_category">
+            <?php foreach($genres as $genre){ ?>
+              <li>
+                <label for="category"><input type="checkbox" class="category-box" name="category" value=""/><?php echo $genre ?></label>
+              </li>
+              <?php  } ?>
+            </ul>
+          </div>
+
+          <!-- SOUS-MENU : Année -->
+          <div class="sub-category">
+            <i class="fa fa-angle-down float-right btn_filter" aria-hidden="true"></i>
+            <h3>Années</h3>
+          </div>
+          <ul class="search_category">
+            <?php foreach($prods as $prod){ ?>
+              <li>
+                <label for="years"><input class="category-box" type="checkbox" name="year-of-prod" value=""><?php echo $prod ?></label>
+              </li>
+            <?php  } ?>
+          </ul>
+
+          <!-- SOUS-MENU : Popularité -->
+          <div class="sub-category">
+            <i class="fa fa-angle-down float-right btn_filter" aria-hidden="true"></i>
+            <h3>Popularité</h3>
+          </div>
+          <label for="pops">Popularités</label>
+          <label for="popularities">10 à 25</label>
+          <input class="category-box" type="checkbox" name="popularities" value="">
+          <label for="popularities">26 à 50</label>
+          <input class="category-box" type="checkbox" name="popularities" value="">
+          <label for="popularities">51 à 75</label>
+          <input class="category-box" type="checkbox" name="popularities" value="">
+          <label for="popularities">76 à 100</label>
+          <input class="category-box" type="checkbox" name="popularities" value="">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <?php
 function afficherImage($movie) {
