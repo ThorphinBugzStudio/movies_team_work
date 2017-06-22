@@ -30,6 +30,6 @@
       <p class="copyright">Copyright © 2017 - Movies Full - Tous droits reservé.</p>
     </footer>
   </body>
-  <script src="inc/js/bootstrap.js" charset="utf-8"></script>
   <script src="inc/js/jquery-3.2.1.js" charset="utf-8"></script>
+  <script src="inc/js/bootstrap.js" charset="utf-8"></script>
 </html>

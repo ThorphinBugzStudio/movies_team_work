@@ -102,6 +102,12 @@
 }
 
 
+/* ------------- CATÉGORIES ---------------- */
+
+.search_category li label {
+  margin: 0;
+}
+
 /*------------------ FOOTER ---------------- */
 
 footer {

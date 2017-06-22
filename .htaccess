@@ -1,0 +1,6 @@
+
+RewriteEngine On
+
+
+RewriteRule ^([a-zA-Z0-9]+)/([a-zA-Z0-9]+)$ index.php?page=$1
+RewriteRule ^([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/$ detail.php?slug=$1

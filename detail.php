@@ -1,36 +1,75 @@
+
+
 <?php
 include('inc/pdo.php');
+include('inc/header.php');
 
-if(!empty($_GET['slug'])) {
-  $slug = $_GET['slug'];
-}
+  if(!empty($_GET['slug'])) {
+    $slug = $_GET['slug'];
 
-$replace = str_replace ( '-', ' ', $slug);
-$dateprod = substr($replace, -4);
-$title = substr($replace, 0, -4);
+    $sql = "SELECT * FROM movies_full WHERE slug = :slug";
+    $query = $pdo->prepare($sql);
+    $query->bindValue(':slug',$slug, PDO::PARAM_STR);
+    $query->execute();
+    $movie = $query->fetch();
 
-$sql = "SELECT * FROM movies_full WHERE title = :title && year = :dateprod ";
-$query = $pdo->prepare($sql);
-$query->bindValue(':title',$title, PDO::PARAM_STR);
-$query->bindValue(':dateprod',$dateprod, PDO::PARAM_STR);
-        $query->execute();
-        $movies = $query->fetchAll();
+    if (empty($movie)){
+      header('Location: redirection404.php');
+    } else {
+      echo '<img class="vignette" src="inc/img/posters/'.$movie['id'].'.jpg" />';
+      echo '<p> titre: '.$movie['title'].'</p>';
+      echo '<p> années de parution: '.$movie['year'].'</p>';
+      echo '<p> directors: '.$movie['directors'].'</p>';
+      echo '<p> genre: '.$movie['genres'].'</p>';
+      echo '<p> résumé: '.$movie['plot'].'</p>';
+      echo '<p> casting: '.$movie['cast'].'</p>';
+      echo '<p> auteurs: '.$movie['writers'].'</p>';
+      echo '<p> durée: '.$movie['runtime'].' minutes'.'</p>';
+      echo '<p> classification du film: '.$movie['mpaa'].'</p>';
+      echo '<p> note: '.$movie['rating'].'/100'.'</p>';
+      echo '<p> popularité: '.$movie['popularity'].'</p>';
+    }
+  } else {
+   header('Location: redirection404.php');
+  }
 
 
-foreach ($movies as $movie) {
-
-    echo '<img class="vignette" src="inc/img/posters/'.$movie['id'].'.jpg" />';
-    echo '<p> titre: '.$movie['title'].'</p>';
-    echo '<p> années de parution: '.$movie['year'].'</p>';
-    echo '<p> directors: '.$movie['directors'].'</p>';
-    echo '<p> genre: '.$movie['genres'].'</p>';
-    echo '<p> résumé: '.$movie['plot'].'</p>';
-    echo '<p> casting: '.$movie['cast'].'</p>';
-    echo '<p> auteurs: '.$movie['writers'].'</p>';
-    echo '<p> durée: '.$movie['runtime'].' minutes'.'</p>';
-    echo '<p> classification du film: '.$movie['mpaa'].'</p>';
-    echo '<p> note: '.$movie['rating'].'/100'.'</p>';
-    echo '<p> popularité: '.$movie['popularity'].'</p>';
-
-}
 ?>
+<!-- Facebook -->
+<!-- Include the SDK JavaScript on your page once, ideally right after the opening <body> tag. -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Placez ce code où vous voulez que le plug-in apparaisse sur votre page. -->
+  <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Partager</a></div>
+
+<!-- twitter -->
+<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<!-- linkedin -->
+<script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: fr_FR</script>
+<script type="IN/Share"></script>
+
+<!-- google + -->
+<!-- Placez cette balise où vous souhaitez faire apparaître le gadget bouton "Partager". -->
+<div class="g-plus" data-action="share" data-annotation="none"></div>
+
+<!-- Placez cette ballise après la dernière balise Partager. -->
+<script type="text/javascript">
+  window.___gcfg = {lang: 'fr'};
+
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+<?php include('inc/footer.php'); ?>
