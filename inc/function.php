@@ -58,3 +58,31 @@ function isConnected()
    }
 }
 
+// Recuperation informations session via cookie
+function isKnown()
+{
+   if(!empty($_COOKIE['userFullMovie']))
+   {
+      $pdo = newBddCon('exo_equipe');
+
+      $sql = "SELECT id, pseudo, email, email_verified, token, password, rule FROM users WHERE id = :id";
+      $query = $pdo->prepare($sql);
+      $query->bindValue(':id', $_COOKIE['userFullMovie'], PDO::PARAM_INT);
+      $query->execute();
+      $result = $query->fetch();
+
+      if ($result != '')
+      {
+         // données utilisateur recuperées
+         $_SESSION['user'] = array(
+            'id'       => $result['id'],
+            'pseudo'   => $result['pseudo'],
+            'email'    => $result['email'],
+            'email_verified'    => $result['email_verified'],
+            'token'    => $result['token'],
+            'rule'     => $result['rule'],
+            'ip'       => get_ip()
+         );
+      }
+   }
+}
