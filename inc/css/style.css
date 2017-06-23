@@ -306,6 +306,12 @@
   border-left: 1px solid grey;
 }
 
+.search_category {
+  max-height: 150px;
+  overflow: auto;
+}
+
+
 .search_category li {
   list-style: none;
   margin-left: 10px;
