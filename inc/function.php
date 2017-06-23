@@ -63,7 +63,14 @@ function isKnown()
 {
    if(!empty($_COOKIE['userFullMovie']))
    {
-      $pdo = newBddCon('exo_equipe');
+      if(!file_exists('inc/pdo-thorphin.php'))
+      {
+            include('inc/pdo.php');
+      }
+      else
+      {
+            include('inc/pdo-thorphin.php');
+      }
 
       $sql = "SELECT id, pseudo, email, email_verified, token, password, rule FROM users WHERE id = :id";
       $query = $pdo->prepare($sql);
@@ -75,13 +82,13 @@ function isKnown()
       {
          // données utilisateur recuperées
          $_SESSION['user'] = array(
-            'id'       => $result['id'],
-            'pseudo'   => $result['pseudo'],
-            'email'    => $result['email'],
-            'email_verified'    => $result['email_verified'],
-            'token'    => $result['token'],
-            'rule'     => $result['rule'],
-            'ip'       => get_ip()
+            'id'             => $result['id'],
+            'pseudo'         => $result['pseudo'],
+            'email'          => $result['email'],
+            'email_verified' => $result['email_verified'],
+            'token'          => $result['token'],
+            'rule'           => $result['rule'],
+            'ip'             => get_ip()
          );
       }
    }

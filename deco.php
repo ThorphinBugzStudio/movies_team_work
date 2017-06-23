@@ -9,11 +9,14 @@
    include_once('./inc/required.php');
 
    // Titre Page
-   $title = 'UserLog - Deconnect';
+   $title = 'Déconnexion';
 
    // destroy session
+   setcookie('userFullMovie', '', 1);
+   unset($_COOKIE['userFullMovie']);
+
+   unset($_SESSION['user']);
    session_destroy();
-   unset($_SESSION);
 
    header('Location: ./index.php');
    exit;

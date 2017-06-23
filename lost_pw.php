@@ -19,10 +19,10 @@
    // Gestion des erreurs de formulaire
    if(!empty($_POST['submitForm']))
    {
-      // Redirige vers index.php si bouton annuler pressé
+      // Redirige vers login.php si bouton annuler pressé
       if ($_POST['submitForm'] == 'Annuler')
       {
-         header('Location: ./index.php');
+         header('Location: ./login.php');
          exit;
       }
 

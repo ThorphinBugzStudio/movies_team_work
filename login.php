@@ -66,13 +66,13 @@ if(!empty($_POST['submitForm']))
             // Le mot de passe est correct
             // Ouverture session
             $_SESSION['user'] = array(
-               'id'       => $result['id'],
-               'pseudo'   => $result['pseudo'],
-               'email'    => $result['email'],
-               'email_verified'    => $result['email_verified'],
-               'token'    => $result['token'],
-               'rule'     => $result['rule'],
-               'ip'       => get_ip()
+               'id'             => $result['id'],
+               'pseudo'         => $result['pseudo'],
+               'email'          => $result['email'],
+               'email_verified' => $result['email_verified'],
+               'token'          => $result['token'],
+               'rule'           => $result['rule'],
+               'ip'             => get_ip()
             );
 
             $successForm = true;
@@ -81,7 +81,7 @@ if(!empty($_POST['submitForm']))
             if(!empty($_POST['check']))
             {
                setcookie('userFullMovie', $_SESSION['user']['id'], mktime(time()+60*60*24*30));
-               echo $_COOKIE['userFullMovie'];
+            //    echo $_COOKIE['userFullMovie'];
             }
          }
          else
