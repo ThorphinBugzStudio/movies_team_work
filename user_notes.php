@@ -5,9 +5,8 @@ session_start();
 $user = $_SESSION['user']['id'];
 
 $sql = "SELECT * FROM movies_user_note AS mun
-LEFT JOIN movies_full AS mf
-ON mun.id_user = $user
-AND mf.id = mun.id_movie ";
+INNER JOIN movies_full AS mf
+WHERE mf.id = mun.id_movie AND mun.id_user = $user";
 
 $query = $pdo->prepare($sql);
 $query->execute();

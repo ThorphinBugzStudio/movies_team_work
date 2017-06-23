@@ -1,7 +1,8 @@
 <?php
+session_start();
+
 include_once('./inc/required.php');
 include('inc/header.php');
-session_start();
 
   if(!empty($_GET['slug'])) {
     $slug = $_GET['slug'];
@@ -53,6 +54,10 @@ setcookie('favoris', $movie['id'] , (time() + 3600));
 
 <form action="" method="POST">
     <input type="submit" name="btn-sub" class="btn btn-primary" value="favoris" /><br>
+    
+    <!--bouton rapide pour test user_notes.php-->
+    <a href="user_notes.php"><button type="button" class="btn btn-primary mt-1">Vos notes</button></a>
+
 </form>
 
 
