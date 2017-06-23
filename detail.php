@@ -1,7 +1,6 @@
 <?php
 include_once('./inc/required.php');
 include('inc/header.php');
-include('inc/function-favoris.php');
 session_start();
 
   if(!empty($_GET['slug'])) {
@@ -40,7 +39,18 @@ setcookie('favoris', $movie['id'] , (time() + 3600));
     header('Location: favoris.php');
 }
 
+
+
 ?>
+<div class="rating rating2">
+  <a href="note.php?id=<?php echo $movie['id'] ?>&note=1&slug=<?php echo $slug ?>" title="Give 1 stars">★</a>
+    <a href="note.php?id=<?php echo $movie['id'] ?>&note=2&slug=<?php echo $slug ?>" title="Give 2 stars">★</a>
+      <a href="note.php?id=<?php echo $movie['id'] ?>&note=3&slug=<?php echo $slug ?>" title="Give 3 stars">★</a>
+        <a href="note.php?id=<?php echo $movie['id'] ?>&note=4&slug=<?php echo $slug ?>" title="Give 4 stars">★</a>
+          <a href="note.php?id=<?php echo $movie['id'] ?>&note=5&slug=<?php echo $slug ?>" title="Give 5 stars">★</a>
+
+</div>
+
 <form action="" method="POST">
     <input type="submit" name="btn-sub" class="btn btn-primary" value="favoris" /><br>
 </form>
