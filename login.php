@@ -112,23 +112,36 @@ if(!empty($_POST['submitForm']))
    <?php if (!$successForm)
    { ?>
 
-      <form class="newPost mt-2" action="#" method="post">
-         <h3>Login :</h3>
-         <div class="alert-danger"><?php if (!empty($errors['ErrConnect'])) {echo $errors['ErrConnect'].'<br />';} ?></div>
+      <form class="col-sm-12 col-lg-6 col-xl-6 newPost mt-2" action="#" method="post">
+         <div class="page_title row">
+           <i class="fa fa-sign-in" aria-hidden="true"></i>
+           <h2 class="my-auto">Connexion</h2>
+         </div>
+         <div class="inscription_content">
+           <div class="alert-danger"><?php if (!empty($errors['ErrConnect'])) {echo $errors['ErrConnect'].'<br />';} ?></div>
 
-         <label class="mt-2" for="userPseudo">Pseudo ou adresse mail :</label>
-         <div class="alert-warning"><?php if (!empty($errors['ErrPseudo'])) {echo $errors['ErrPseudo'].'<br />';} ?></div>
-         <input type="text" name="userPseudo" value="<?php if (!empty($_POST['userPseudo'])) {echo $_POST['userPseudo'];} ?>" size="100"><br />
+           <label class="" for="userPseudo">Pseudo ou adresse mail :</label>
+           <div class="alert-warning"><?php if (!empty($errors['ErrPseudo'])) {echo $errors['ErrPseudo'].'<br />';} ?></div>
+           <input type="text" name="userPseudo" value="<?php if (!empty($_POST['userPseudo'])) {echo $_POST['userPseudo'];} ?>" size="100"><br />
 
-         <label class="mt-2" for="userPassword">Mot de passe :</label>
-         <div class="alert-warning"><?php if (!empty($errors['ErrPassword'])) {echo $errors['ErrPassword'].'<br />';} ?></div>
-         <input type="password" name="userPassword" value="<?php if (!empty($_POST['userPassword'])) {echo $_POST['userPassword'];} ?>" size="100"><br />
+           <div class="spacer-y-10"></div>
 
-         <input type="checkbox" name="check" value="true"> Se souvenir de moi</input><br />
+           <label class="" for="userPassword">Mot de passe :</label>
+           <div class="alert-warning"><?php if (!empty($errors['ErrPassword'])) {echo $errors['ErrPassword'].'<br />';} ?></div>
+           <input type="password" name="userPassword" value="<?php if (!empty($_POST['userPassword'])) {echo $_POST['userPassword'];} ?>" size="100"><br />
 
-         <input type="submit" name="submitForm" value="Login" class="btn-success mt-2">
-         <input type="submit" name="submitForm" value="Annuler" class="btn-warning mt-2">
-         <input type="submit" name="submitForm" value="Password Lost" class="btn-danger mt-2">
+           <div class="spacer-y-10"></div>
+
+           <div class="checkbox_saveme row justify-content-center">
+             <label for="check"><input class="checkbox" type="checkbox" name="check" value="true">Se souvenir de moi</label><br />
+           </div>
+
+           <div class="btn_under_form">
+             <input type="submit" name="submitForm" value="Login" class="btn_validate">
+             <input type="submit" name="submitForm" value="Annuler" class="btn_cancel">
+             <input type="submit" name="submitForm" value="Mot de passe oublié" class="btn_cancel">
+           </div>
+         </div>
 
       </form>
    <?php } else { ?>

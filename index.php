@@ -94,8 +94,8 @@ foreach($films as $film)
    }
 }
 
-// Requête pour afficher les 12 premiers films
-$sql = "SELECT * FROM movies_full ORDER BY RAND() LIMIT 12";
+// Requête pour afficher les 20 premiers films
+$sql = "SELECT * FROM movies_full ORDER BY RAND() LIMIT 20";
 $query = $pdo->prepare($sql);
         $query->execute();
         $movies = $query->fetchAll();
@@ -190,9 +190,14 @@ if(!empty($_POST['submit']))
 
 
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-xl-10 col-lg-10 col-sm-12">
-      <div class="movies_grid">
+  <div class="row justify-content-center">
+    <div class="col-sm-12 col-md-7 col-lg-8 col-xl-8">
+      <!-- Titre : Accueil -->
+      <div class="page_title row">
+        <i class="fa fa-home" aria-hidden="true"></i>
+        <h2 class="my-auto">Accueil</h2>
+      </div>
+      <div class="movies_grid search-form">
         <?php
         if($success==false){
 //Afficher les 10 films au hasard
@@ -209,15 +214,15 @@ if(!empty($_POST['submit']))
           }
         }
         ?>
-      </div>
-      <!-- Bouton "+ de films !" -->
-      <div class="justify-content-center btn_more">
-        <a class="btn btn_more_movies" href="index.php" role="button">+ de films !</a>
+        <!-- Bouton "+ de films !" -->
+        <div class="justify-content-center btn_more">
+          <a class="btn btn_more_movies" href="index.php" role="button">+ de films !</a>
+        </div>
       </div>
 
     </div>
 
-    <div class="col-xl-2 col-lg-2 col-sm-12">
+    <div class="widget col-sm-12 col-md-4 col-lg-3 col-xl-3">
       <!-- WIDGET : Rechercher -->
       <div class="search-form">
         <div class="widget_title row">
@@ -225,83 +230,79 @@ if(!empty($_POST['submit']))
           <h2 class="my-auto">Rechercher</h2>
         </div>
 
-        <div class="input-group">
           <form class="" action="" method="post">
-            <input type="text" class="form-control w-100" name="search-content" placeholder="Rechercher...">
-            <span class="input-group-btn">
-              <input class="btn btn-secondary" type="submit" name="submit"><i class="fa fa-search" aria-hidden="true"></i>
-            </span>
-        </div>
-        <!-- SOUS-MENU : Filtres -->
-        <div class="sub-category">
-          <i class="fa fa-angle-down float-right btn_filter" id="filter" aria-hidden="true"></i>
-          <h3>Filtres</h3>
-        </div>
-        <div class="hidden"id="options">
-          <label for="erase" class="delete_all">Tout effacer</label>
-          <input type="checkbox" id="erase-all" name="erase" value="" class="delete_all">
-          <ul class="search_category">
-            <?php foreach($genres as $genre){ ?>
-              <li>
-                <label for="category"><input type="checkbox" class="category-box" name="category[]" value="<?php echo $genre ?>"/><?php echo $genre ?></label>
-              </li>
-              <?php  } ?>
-            </ul>
-          </div>
+            <div class="container-fluid row justify-content-center mx-auto input-group">
+              <input type="text" class="form-control" name="search-content" placeholder="Rechercher...">
+              <input class="btn btn-secondary btn-search" type="submit" name="submit" value="&#xf002">
+            </div>
 
-          <!-- SOUS-MENU : Année -->
-          <div class="sub-category">
-            <i class="fa fa-angle-down float-right btn_filter" aria-hidden="true"></i>
-            <h3>Années</h3>
-          </div>
-          <ul class="search_category">
-            <?php
+            <div class="row justify-content-center">
+              <label for="erase" class="delete_all"><input class="checkbox" type="checkbox" id="erase-all" name="erase" value="" class="delete_all">Réinitialiser</label>
+            </div>
 
-            $annees = array(
-              '1900/1925' => '1900 à 1925',
-              '1925/1950' => '1925 à 1950',
-              '1950/1975' => '1950 à 1975',
-              '1975/2000' => '1975 à 2000',
-              '2000/2017' => '2000 à 2017'
-            );
+            <!-- SOUS-MENU : Filtres -->
+            <div class="sub-category">
+              <i class="fa fa-angle-down float-right btn_filter" id="filter" aria-hidden="true"></i>
+              <h3>Filtres</h3>
+            </div>
+            <div class="hidden" id="options">
+              <ul class="search_category">
+                <?php foreach($genres as $genre){ ?>
+                  <li>
+                    <label for="category"><input type="checkbox" class="category-box" name="category[]" value="<?php echo $genre ?>"/><?php echo $genre ?></label>
+                  </li>
+                  <?php  } ?>
+                </ul>
+              </div>
 
+              <!-- SOUS-MENU : Année -->
+              <div class="sub-category">
+                <i class="fa fa-angle-down float-right btn_filter" id="years" aria-hidden="true"></i>
+                <h3>Années</h3>
+              </div>
+              <div class="hidden" id="options2">
+                <ul class="search_category">
+                <?php
+                $annees = array(
+                  '1900/1925' => '1900 à 1925',
+                  '1925/1950' => '1925 à 1950',
+                  '1950/1975' => '1950 à 1975',
+                  '1975/2000' => '1975 à 2000',
+                  '2000/2017' => '2000 à 2017'
+                );
 
+                  foreach($annees as $annee => $key) { ?>
+                    <li>
+                      <label for="years"><input class="category-box" type="checkbox" name="year-of-prod[]" value="<?php echo $key ?>"><?php echo $key ?></label>
+                    </li>
+                <?php } ?>
+                </ul>
+              </div>
 
-              foreach($annees as $annee => $key)
-              { ?>
+              <!-- SOUS-MENU : Popularité -->
+              <div class="sub-category">
+                <i class="fa fa-angle-down float-right btn_filter" id="popularity" aria-hidden="true"></i>
+                <h3>Popularité</h3>
+              </div>
+              <div class="hidden" id="options3">
+                <ul class="search_category">
+              <!--<label for="pops">Popularités</label>-->
 
-                <li>
+              <?php $popus = array(
+                    '0 à 25' => '0 à 25',
+                    '25 à 50' => '25 à 50',
+                    '50 à 75' => '50 à 75',
+                    '75 à 100' => '75 à 100'
+              );
 
-                <label for="years"><input class="category-box" type="checkbox" name="year-of-prod[]" value="<?php echo $key ?>"><?php echo $key ?></label>
-              </li>
-
-            <?php
-              } ?>
-          </ul>
-
-          <!-- SOUS-MENU : Popularité -->
-          <div class="sub-category">
-            <i class="fa fa-angle-down float-right btn_filter" aria-hidden="true"></i>
-            <h3>Popularité</h3>
-          </div>
-
-          <label for="pops">Popularités</label>
-
-          <?php $popus =array(
-
-                '0 à 25' => '0 à 25',
-                '25 à 50' => '25 à 50',
-                '50 à 75' => '50 à 75',
-                '75 à 100' => '75 à 100'
-          );
-          foreach($popus as $popu)
-          { ?>
-            <label for="ratings"><?php echo $popu ?></label>
-            <input class="category-box" type="checkbox" name="ratings[]" value="<?php echo $popu ?>">
-
-        <?php  } ?>
-
-        </div>
+              foreach($popus as $popu) { ?>
+                  <li>
+                    <label for="ratings"><input class="category-box" type="checkbox" name="ratings[]" value="<?php echo $popu ?>"><?php echo $popu ?></label>
+                  </li>
+            <?php } ?>
+              </ul>
+              </div>
+            </div>
       </form>
     </div>
   </div>
