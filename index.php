@@ -80,10 +80,10 @@ foreach($years as $year){
   if($exist == false){
 
     $prods[$year] = $year;
+
   }
 }
 }
-
 // generation dynamique d'un array contenant les genres de films à partir de la bdd
 $genres = array();
 
@@ -130,27 +130,61 @@ if(!empty($_POST['submit']))
   $search_content = trim(strip_tags($_POST['search-content']));
   $category = $_POST['category'];
   $year_of_prod = $_POST['year-of-prod'];
-  $ratings = $_POST['ratings'];
-  debugg($category);
+  $ratings = ($_POST['ratings']);
+  //debugg($_POST['ratings']);
+
 
 
    $sql = "SELECT * FROM movies_full WHERE 1=1 ";
 
    if(!empty($category)){
      foreach ($category as $cate ) {
-       $sql .= "AND genres = $cate ";
+       $sql .= "AND genres = '$cate' ";
      }
    }
 
-   if(!empty($year_of_prod)){
-     foreach($year_of_prod as $year){
-       $sql .= "AND year = $year ";
-     }
+   if(!empty($year_of_prod))
+   {
+     foreach($year_of_prod as $year)
+     {
+
+         if(($year > 1899) && ($year < 1925) ){
+           $sql .= "AND year BETWEEN '1900' AND '1925'";
+         }
+         if(($year >= 1925) && ($year < 1950)){
+           $sql .= "AND year BETWEEN '1925' AND '1949'";
+         }
+
+         if(($year >= 1950) && ($year < 1975)){
+           $sql .= "AND year BETWEEN '1950' AND '1974'";
+         }
+
+         if(($year >= 1975) && ($year < 2000)){
+           $sql .= "AND year BETWEEN '1975' AND '1999'";
+         }
+
+         if(($year >= 2000) && ($year < 2017)){
+           $sql .= "AND year BETWEEN '2000' AND '2017'";
+         }
+       }
    }
 
-   if(!empty($ratings)){
-     foreach($ratings as $rate){
-       $sql .= "AND rating = $rate ";
+   if(!empty($ratings))
+   {
+     foreach($ratings as $rate)
+     {
+       if(($rate >= 0) && ($rate <= 25))
+       {
+         $sql .= "AND rating BETWEEN '0' AND '25' ";
+        //  debugg($sql);
+        //  die('here');
+       }
+       if(($rate >= 25) && ($rate <= 50))
+       {
+         $sql .= "AND rating BETWEEN '25' AND '50' ";
+        //  debugg($sql);
+        //  die('here');
+       }
      }
    }
 
@@ -169,10 +203,8 @@ if(!empty($_POST['submit']))
            $results = $query->fetchAll();
 
            $success = true;
-
-} else {
-
-  //aucun élément de requete
+          //  debugg($sql);
+          //  die('here');
 }
 
 ?>
@@ -244,11 +276,28 @@ if(!empty($_POST['submit']))
             <h3>Années</h3>
           </div>
           <ul class="search_category">
-            <?php foreach($prods as $prod){ ?>
-              <li>
-                <label for="years"><input class="category-box" type="checkbox" name="year-of-prod[]" value="<?php echo $prod ?>"><?php echo $prod ?></label>
+            <?php
+
+            $annees = array(
+              '1900/1925' => '1900 à 1925',
+              '1925/1950' => '1925 à 1950',
+              '1950/1975' => '1950 à 1975',
+              '1975/2000' => '1975 à 2000',
+              '2000/2017' => '2000 à 2017'
+            );
+
+
+
+              foreach($annees as $annee => $key)
+              { ?>
+
+                <li>
+
+                <label for="years"><input class="category-box" type="checkbox" name="year-of-prod[]" value="<?php echo $key ?>"><?php echo $key ?></label>
               </li>
-            <?php  } ?>
+
+            <?php
+              } ?>
           </ul>
 
           <!-- SOUS-MENU : Popularité -->
@@ -256,15 +305,23 @@ if(!empty($_POST['submit']))
             <i class="fa fa-angle-down float-right btn_filter" aria-hidden="true"></i>
             <h3>Popularité</h3>
           </div>
+
           <label for="pops">Popularités</label>
-          <label for="ratings">10 à 25</label>
-          <input class="category-box" type="checkbox" name="ratings[]" value="<?php echo '10 à 25' ?>">
-          <label for="ratings">26 à 50</label>
-          <input class="category-box" type="checkbox" name="ratings[]" value="<?php echo '26 à 50' ?>">
-          <label for="ratings">51 à 75</label>
-          <input class="category-box" type="checkbox" name="ratings[]" value="<?php echo '51 à 75' ?>">
-          <label for="ratings">76 à 100</label>
-          <input class="category-box" type="checkbox" name="ratings[]" value="<?php echo '76 à 100' ?>">
+
+          <?php $popus =array(
+
+                '0 à 25' => '0 à 25',
+                '25 à 50' => '25 à 50',
+                '50 à 75' => '50 à 75',
+                '75 à 100' => '75 à 100'
+          );
+          foreach($popus as $popu)
+          { ?>
+            <label for="ratings"><?php echo $popu ?></label>
+            <input class="category-box" type="checkbox" name="ratings[]" value="<?php echo $popu ?>">
+
+        <?php  } ?>
+
         </div>
       </form>
     </div>
