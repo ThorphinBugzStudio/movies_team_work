@@ -63,14 +63,7 @@ function isKnown()
 {
    if(!empty($_COOKIE['userFullMovie']))
    {
-      if(!file_exists('inc/pdo-thorphin.php'))
-      {
-            include('inc/pdo.php');
-      }
-      else
-      {
-            include('inc/pdo-thorphin.php');
-      }
+      $pdo = newBddCon('exo_equipe');
 
       $sql = "SELECT id, pseudo, email, email_verified, token, password, rule FROM users WHERE id = :id";
       $query = $pdo->prepare($sql);

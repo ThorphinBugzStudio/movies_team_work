@@ -129,25 +129,24 @@ function dateFr($dateBDD = '')
 // newBddCon(str $bddName -> nom de la bdd)
 function newBddCon($bddName)
 {
+   // test os server windows ou autre
+   if (!stristr($_SERVER["HTTP_USER_AGENT"], 'Windows'))
+   {
+      $mdp = 'mysql';
+   }
+   else
+  {
+      $mdp = '';
+  }
+   
    // test si $bddName est string
    if (is_string($bddName))
    {
-      // pdo max
-      if(!file_exists('inc/pdo-thorphin.php'))
-      {
-
-            return new PDO('mysql:host=localhost;dbname='.$bddName, 'root', '', array(
-               PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
-               PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-               PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING
-            ));
-
-
-      }
-      else
-      {
-         include('inc/pdo-thorphin.php');
-      }
+      return new PDO('mysql:host=localhost;dbname='.$bddName, 'root', $mdp, array(
+                        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                        PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING
+                        ));
    }
    else
    {
