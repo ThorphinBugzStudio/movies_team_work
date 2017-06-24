@@ -102,92 +102,124 @@ $query = $pdo->prepare($sql);
 
 
 //requete de recherche avec options
+// ajout de parentheses partout paske sans je suis paumé ;)
+// les parentheses c'est bon ! mangez 5 parentheses par jour !
 
 if(!empty($_POST['submit']))
 {
-
   $search_content = trim(strip_tags($_POST['search-content']));
-  $category = $_POST['category'];
-  $year_of_prod = $_POST['year-of-prod'];
-  $ratings = ($_POST['ratings']);
+  // ajouts de conditions pour verifier que genres, année et rating du post non vide
+  if (!empty($_POST['category']))
+  {
+    $category = $_POST['category'];
+  }
+  if (!empty($_POST['year-of-prod']))
+  {
+    $year_of_prod = $_POST['year-of-prod'];
+  }
+  if (!empty($_POST['ratings']))
+  {
+    $ratings = ($_POST['ratings']);
+  }
 
 
 
 
    $sql = "SELECT * FROM movies_full WHERE 1=1 ";
 
+   // affinage du nourissage de $sql paske film pas pouvoir etre horreur AND romance quoique ^^
    if(!empty($category)){
+     $sql .= 'AND ( ';
+     $flag = 0;
      foreach ($category as $cate ) {
-       $sql .= "AND genres = '$cate' ";
+       $flag ++;
+       if ($flag > 1) { $sql .= "OR ";}
+       $sql .= "genres = '$cate' ";
      }
+     $sql .= ') ';
    }
 
+   // affinage du nourissage de $sql paske film pas pouvoir etre entre 1900/1924 AND 1925/1949 sans invention du voyage temporel
    if(!empty($year_of_prod))
    {
+     $sql .= 'AND ( ';
+     $flag = 0;
      foreach($year_of_prod as $year)
      {
-
+         $flag ++;
+         if ($flag > 1) { $sql .= "OR ";}
          if(($year > 1899) && ($year < 1925) ){
-           $sql .= "AND year BETWEEN '1900' AND '1924' ";
+           $sql .= "( year BETWEEN '1900' AND '1924' ) ";
          }
          if(($year >= 1925) && ($year < 1950)){
-           $sql .= "AND year BETWEEN '1925' AND '1949' ";
+           $sql .= " (year BETWEEN '1925' AND '1949' ) ";
          }
 
          if(($year >= 1950) && ($year < 1975)){
-           $sql .= "AND year BETWEEN '1950' AND '1974' ";
+           $sql .= "( year BETWEEN '1950' AND '1974' ) ";
          }
 
          if(($year >= 1975) && ($year < 2000)){
-           $sql .= "AND year BETWEEN '1975' AND '1999' ";
+           $sql .= "( year BETWEEN '1975' AND '1999' ) ";
          }
 
          if(($year >= 2000) && ($year < 2017)){
-           $sql .= "AND year BETWEEN '2000' AND '2017' ";
+           $sql .= "( year BETWEEN '2000' AND '2017' ) ";
          }
        }
+      $sql .= ') ';
    }
 
+   // affinage du nourissage de $sql paske film pas pouvoir etre nul et excellent quoique
    if(!empty($ratings))
    {
+     $sql .= 'AND ( ';
+     $flag = 0;
      foreach($ratings as $rate)
      {
+       $flag ++;
+       if ($flag > 1) { $sql .= "OR ";}
        if(($rate === '0 à 25'))
        {
-         $sql .= "AND popularity BETWEEN '0' AND '25' ";
+         $sql .= "( popularity BETWEEN '0' AND '25' ) ";
        }
        if(($rate === '25 à 50'))
        {
-         $sql .= "AND popularity BETWEEN '25' AND '50' ";
+         $sql .= "( popularity BETWEEN '25' AND '50' ) ";
        }
        if(($rate === '50 à 75'))
        {
-         $sql .= "AND popularity BETWEEN '50' AND '75' ";
+         $sql .= "( popularity BETWEEN '50' AND '75' ) ";
        }
        if(($rate === '75 à 100'))
        {
-         $sql .= "AND popularity BETWEEN '75' AND '100' ";
+         $sql .= "( popularity BETWEEN '75' AND '100' ) ";
        }
      }
+     $sql .= ') ';
    }
 
    if(!empty($search_content)){
 
-     $sql .= "AND title LIKE '%$search_content%'
+     $sql .= "AND ( title LIKE '%$search_content%'
               OR plot LIKE '%$search_content%'
               OR directors LIKE '%$search_content%'
               OR cast LIKE '%$search_content%'
               OR writers LIKE '%$search_content%'
-              ";
+               ) ";
 
    }
-           $query = $pdo->prepare($sql);
-           $query->execute();
-           $results = $query->fetchAll();
 
-           $success = true;
-          //  debugg($sql);
-          //  die('here');
+   // Ajout d'une limit à 20 films : sans pagination 5000 films renvoyés tuent le navigateur
+   $sql .= "LIMIT 20";
+
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    $results = $query->fetchAll();
+
+    $success = true;
+    // debug($sql);
+    // die('here');
 }
 
 ?>
