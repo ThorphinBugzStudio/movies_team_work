@@ -132,7 +132,7 @@ function newBddCon($bddName)
    // test os server windows ou autre
    if (!stristr($_SERVER["HTTP_USER_AGENT"], 'Windows'))
    {
-      $mdp = 'root';
+      $mdp = 'mysql';
    }
    else
   {
