@@ -1,25 +1,22 @@
 # movies_team_work
 
-                              Page d'acceuil
+  » Page d'acceuil
 
-=======affichage de films au hasard====
+---==== Affichage de films au hasard ====---
 
-- requete sql pour afficher 10 affiches de films
+- Requête SQL pour afficher 20 affiches de films,
+- Requête bouton '+ de films'.
 
-- requete bouton +de films en bas à droite
-
-1°) partie filtre qui cache un formulaire de recherche
+1°) Partie filtre qui cache un formulaire de recherche
 
 - Catégorie (plusieurs checkboxes, dont une pour cocher tout et une pour tout décocher)
 - Années (de xxxx à xxxx) -    Popularité
 - Recherche
 
  Vous devez ajouter un formulaire de recherche, près de votre formulaire de filtre.
- ceux-ci seront recherchés dans la table de films parmi les colonnes suivantes :
-- titre du film,
-- acteurs,
-- réalisateurs.
+ Ceux-ci seront recherchés dans la table de films parmi les colonnes suivantes :
+- Titre du film,
+- Acteurs,
+- Réalisateurs.
 
-
-
-affiches clickable qui amène sr le detail du film
+Affiches cliquable qui amène sur le detail du film.
