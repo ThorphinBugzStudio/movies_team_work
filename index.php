@@ -110,7 +110,7 @@ if(!empty($_POST['submit']))
   $category = $_POST['category'];
   $year_of_prod = $_POST['year-of-prod'];
   $ratings = ($_POST['ratings']);
-  //debugg($_POST['ratings']);
+
 
 
 
@@ -128,22 +128,22 @@ if(!empty($_POST['submit']))
      {
 
          if(($year > 1899) && ($year < 1925) ){
-           $sql .= "AND year BETWEEN '1900' AND '1925'";
+           $sql .= "AND year BETWEEN '1900' AND '1924' ";
          }
          if(($year >= 1925) && ($year < 1950)){
-           $sql .= "AND year BETWEEN '1925' AND '1949'";
+           $sql .= "AND year BETWEEN '1925' AND '1949' ";
          }
 
          if(($year >= 1950) && ($year < 1975)){
-           $sql .= "AND year BETWEEN '1950' AND '1974'";
+           $sql .= "AND year BETWEEN '1950' AND '1974' ";
          }
 
          if(($year >= 1975) && ($year < 2000)){
-           $sql .= "AND year BETWEEN '1975' AND '1999'";
+           $sql .= "AND year BETWEEN '1975' AND '1999' ";
          }
 
          if(($year >= 2000) && ($year < 2017)){
-           $sql .= "AND year BETWEEN '2000' AND '2017'";
+           $sql .= "AND year BETWEEN '2000' AND '2017' ";
          }
        }
    }
@@ -152,17 +152,21 @@ if(!empty($_POST['submit']))
    {
      foreach($ratings as $rate)
      {
-       if(($rate >= 0) && ($rate <= 25))
+       if(($rate === '0 à 25'))
        {
-         $sql .= "AND rating BETWEEN '0' AND '25' ";
-        //  debugg($sql);
-        //  die('here');
+         $sql .= "AND popularity BETWEEN '0' AND '25' ";
        }
-       if(($rate >= 25) && ($rate <= 50))
+       if(($rate === '25 à 50'))
        {
-         $sql .= "AND rating BETWEEN '25' AND '50' ";
-        //  debugg($sql);
-        //  die('here');
+         $sql .= "AND popularity BETWEEN '25' AND '50' ";
+       }
+       if(($rate === '50 à 75'))
+       {
+         $sql .= "AND popularity BETWEEN '50' AND '75' ";
+       }
+       if(($rate === '75 à 100'))
+       {
+         $sql .= "AND popularity BETWEEN '75' AND '100' ";
        }
      }
    }
